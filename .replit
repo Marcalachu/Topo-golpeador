@@ -1,0 +1,14 @@
+# .replit
+entrypoint="index.html"
+hidden=[".config"]
+modules = ["web:v2-20230623-0b7a606"]
+
+[nix]
+channel = "stable-23_11"
+
+[deployment]
+publicDir = "/"
+deploymentTarget = "static"
+
+# Comando de inicio
+run = ["npx", "serve", "-l", "3000", "-s", "dist"]  # ajusta la ruta y puerto según sea necesario

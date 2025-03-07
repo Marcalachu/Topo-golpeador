@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Topo con Respuestas by Marcalachu</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags para PWA (Progressive Web App) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Topo Quiz">
+    <meta name="application-name" content="Topo Quiz">
+    <meta name="theme-color" content="#4a7c59">
+    <meta name="description" content="Juego de Topo con preguntas divertidas en español e inglés">
+    
+    <!-- Iconos para dispositivos móviles -->
+    <link rel="icon" type="image/png" href="images/topo.png">
+    <link rel="apple-touch-icon" href="images/topo.png">
+</head>
+<body>
+    <h1>🎮 ¡Golpea al Topo! 🎮</h1>
+    <h3>by Marcos Martínez</h3>
+    
+    <div id="gameArea">
+        <div id="topo" onclick="mostrarRespuestas()"></div>
+    </div>
+    
+    <div id="respuestas" class="hidden"></div>
+    
+    <h2 id="puntuacionIndividual">🏆 Puntuación: <span id="puntuacion">0</span> 🏆</h2>
+    
+    <div id="seccionEquipos" class="hidden">
+        <!-- La tabla de equipos se generará dinámicamente -->
+    </div>
+    
+    <div id="resultado" class="hidden"></div>
+    
+    <div class="instrucciones">
+        <p>¡Haz clic en el topo y responde correctamente a las preguntas para ganar puntos!</p>
+        <p style="font-size: 12px; margin-top: 5px; color: #3a6c49;">📱 <b>Para jugar en móvil:</b> Toca el topo y las respuestas con el dedo</p>
+        <p style="font-size: 12px; margin-top: 5px; color: #3a6c49;">📲 <b>Para instalar la app:</b> En Android/iOS pulsa en "Compartir" → "Añadir a pantalla de inicio"</p>
+        <div class="controles">
+            <button id="toggleMusica" class="boton-control">🔇 Música</button>
+            <button id="iniciarMusica" class="boton-control" style="margin-top: 5px;">▶️ Iniciar Música</button>
+            <div class="idioma-selector">
+                <button id="es-btn" class="boton-idioma boton-activo">🇪🇸</button>
+                <button id="en-btn" class="boton-idioma">🇬🇧</button>
+            </div>
+            
+            <div class="dificultad-selector">
+                <p id="dificultad-label">Dificultad:</p>
+                <div class="botones-dificultad">
+                    <button id="facil-btn" class="boton-dificultad boton-activo">Fácil</button>
+                    <button id="medio-btn" class="boton-dificultad">Medio</button>
+                    <button id="dificil-btn" class="boton-dificultad">Difícil</button>
+                </div>
+            </div>
+            
+            <div class="modo-juego-selector">
+                <p id="modoJuego-label">Modo de juego:</p>
+                <div class="botones-modo-juego">
+                    <button id="modoSolo-btn" class="boton-modo-juego boton-activo">Individual</button>
+                    <button id="modoEquipo-btn" class="boton-modo-juego">Equipos</button>
+                    <button id="modoContrareloj-btn" class="boton-modo-juego">Contrareloj</button>
+                </div>
+            </div>
+            
+            <div id="configuracionContrareloj" class="hidden">
+                <p>Duración (segundos):</p>
+                <div class="opciones-tiempo">
+                    <button class="opcion-tiempo" data-tiempo="30">30s</button>
+                    <button class="opcion-tiempo" data-tiempo="60">60s</button>
+                    <button class="opcion-tiempo boton-activo" data-tiempo="120">120s</button>
+                </div>
+            </div>
+            <div class="musica-personalizada" style="margin-top: 15px; display: block;">
+                <label id="musicaPersonalizadaLabel" for="subirMusica" style="display: block; margin-bottom: 5px; font-weight: bold;">Subir tu música:</label>
+                <input type="file" id="subirMusica" accept="audio/*" class="input-archivo" style="display: block; width: 100%;" />
+                <div id="nombreMusica" class="nombre-archivo"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+      // Registrar el Service Worker para PWA
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(registration => {
+              console.log('Service Worker registrado:', registration);
+            })
+            .catch(error => {
+              console.log('Error al registrar Service Worker:', error);
+            });
+        });
+      }
+    </script>
+</body>
+</html>
